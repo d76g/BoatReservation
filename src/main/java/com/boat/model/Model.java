@@ -15,4 +15,7 @@ public class Model {
         }
         return instance;
     }
+    public Users getUsers() {
+        return users;
+    }
 }

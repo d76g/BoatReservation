@@ -1,10 +1,9 @@
 package com.boat.controller;
+import com.boat.model.Model;
 import com.boat.model.User;
 import com.boat.model.Users;
 import com.boat.services.ProgramUtils;
-import com.boat.view.ConsoleView;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,12 +17,13 @@ import java.nio.charset.StandardCharsets;
 
 public class UserController {
     // TODO Implement the UserController class
-    private Users users;
-    private ProgramUtils utils;
+//    private Users users;
+    Model model = Model.getInstance();
 
-    public UserController(ProgramUtils utils) {
-        this.utils = utils;
-        this.users = new Users();
+    private Users users = model.getUsers();
+    ProgramUtils utils = ProgramUtils.getInstance();
+
+    public UserController() {
         try {
             readUsers("users.csv");
         } catch (IOException e) {
@@ -75,7 +75,8 @@ public class UserController {
         byte[] salt = generateSalt();
         String hashedPassword = hashPassword(password, salt);
         String saltEncoded = encodeBase64(salt);
-        User user = new User("" + (users.count() + 1), name, email, saltEncoded + ":" + hashedPassword, role);
+        String id = users.increaseUserId();
+        User user = new User(id, name, email, saltEncoded + ":" + hashedPassword, role);
         users.addUser(user);
         try {
             writeUser("users.csv", user);

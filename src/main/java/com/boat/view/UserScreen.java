@@ -6,11 +6,10 @@ import com.boat.services.ProgramUtils;
 public class UserScreen {
     // TODO Implement the UserScreen class
     private UserController controller;
-    private ProgramUtils utils;
+    ProgramUtils utils = ProgramUtils.getInstance();
 
-    public UserScreen(UserController controller, ProgramUtils utils) {
+    public UserScreen(UserController controller) {
         this.controller = controller;
-        this.utils = utils;
     }
 
     public void displayMenu() {

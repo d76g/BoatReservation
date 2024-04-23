@@ -11,11 +11,9 @@ import java.util.Scanner;
 public class ReservationScreen {
     // TODO Implement the ReservationScreen class
     private ReservationController controller;
-
-    private ProgramUtils utils;
+    ProgramUtils utils = ProgramUtils.getInstance();
     User user = null;
-    public ReservationScreen(ReservationController controller, User user, ProgramUtils utils) {
-        this.utils = utils;
+    public ReservationScreen(ReservationController controller, User user) {
         this.controller = controller;
         this.user = user;
     }
@@ -33,7 +31,7 @@ public class ReservationScreen {
             System.out.println("9 - Go back to the main menu");
 
             try {
-                int choice = Integer.parseInt(utils.getInput("Enter your choice:"));
+                int choice = Integer.parseInt(utils.readKey("Enter your choice:"));
                 switch (choice) {
                     case 1:
                         controller.createReservation();

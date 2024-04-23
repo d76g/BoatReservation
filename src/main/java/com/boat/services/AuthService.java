@@ -8,11 +8,10 @@ import java.io.IOException;
 
 public class AuthService {
     private Authentication auth;
-    private ProgramUtils utils;
 
-    public AuthService(Authentication auth, ProgramUtils utils) {
+    ProgramUtils utils = ProgramUtils.getInstance();
+    public AuthService(Authentication auth) {
         this.auth = auth;
-        this.utils = utils;
     }
     public User authenticate() {
         User user = null;

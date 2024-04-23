@@ -20,14 +20,14 @@ public class Main {
         ConsoleView view = new ConsoleView();
         User user = SessionController.loadSession();
         Authentication auth = new Authentication();
-        AuthService authService = new AuthService(auth, utils);
+        AuthService authService = new AuthService(auth);
         if (user == null) {
             user = authService.authenticate();
         }
         ReservationController controller = new ReservationController(user);
-        ReservationScreen screen = new ReservationScreen(controller, user, utils);
-        UserController userController = new UserController(utils);
-        UserScreen userScreen = new UserScreen(userController, utils);
+        ReservationScreen screen = new ReservationScreen(controller, user);
+        UserController userController = new UserController();
+        UserScreen userScreen = new UserScreen(userController);
         MENU_LOOP:
         do {
             view.printMessage("\nChoose an option:");
@@ -41,7 +41,7 @@ public class Main {
             }
             view.printMessage("9 - Exit the program");
 
-            int choice = Integer.parseInt(utils.getInput("Enter your choice:"));
+            int choice = Integer.parseInt(utils.readKey("Enter your choice:"));
 
             switch (choice) {
                 case 1: screen.displayMenu(); break;

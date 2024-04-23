@@ -40,4 +40,16 @@ public class Users implements Iterable<User> {
     public void removeUser(User user) {
         this.users.remove(user);
     }
+
+    // get last user id
+    public String getLastUserId() {
+        if (this.users.isEmpty()) {
+            return "0";
+        }
+        return this.users.get(this.users.size() - 1).getId();
+    }
+    // increase new user id
+    public String increaseUserId() {
+        return String.valueOf(Integer.parseInt(getLastUserId()) + 1);
+    }
 }
